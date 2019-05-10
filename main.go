@@ -55,7 +55,7 @@ func main() {
   // check for readmes
   files, err := ioutil.ReadDir(dir)
   if err != nil {
-      fmt.Printf("%v", err)
+      fmt.Printf("%v\n", err)
       return
   }
 
