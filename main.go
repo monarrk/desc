@@ -7,6 +7,7 @@ import (
   "os"
   "strings"
   "flag"
+  "os/exec"
 )
 
 func check_for_file(file string) bool {
@@ -31,6 +32,17 @@ func main() {
     dir = read()
   } else {
     dir = flag.Arg(0)
+    if flag.Arg(1) == "edit" ||  flag.Arg(1) == "-e" {
+      // use vim to edit DESCRIPTION
+      cmd := exec.Command("vim", flag.Arg(0) + "/DESCRIPTION")
+      cmd.Stdout = os.Stdout
+      cmd.Stdin = os.Stdin
+      cmd.Stderr = os.Stderr
+      if cmd.Run() != nil {
+        fmt.Printf("ERR: %v", cmd.Run())
+      }
+      return
+    }
   }
 
   //check for a DESCRIPTION file
