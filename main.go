@@ -41,15 +41,18 @@ func main() {
   }
 
   // check for readmes
-  files, err := ioutil.ReadDir("./" + dir)
+  files, err := ioutil.ReadDir(dir)
   if err != nil {
       fmt.Printf("%v", err)
+      return
   }
 
   for _, f := range files {
     if strings.HasPrefix(f.Name(), "README") {
       content, _ := ioutil.ReadFile(dir + "/" + f.Name())
       fmt.Printf("Found a README:\n%s\n", content)
+      return
     }
   }
+  fmt.Println("No DESCRIPTION or README found")
 }
