@@ -6,6 +6,7 @@ import (
   "bufio"
   "os"
   "strings"
+  "flag"
 )
 
 func check_for_file(file string) bool {
@@ -23,8 +24,16 @@ func read() string {
 }
 
 func main() {
-  fmt.Print("Enter the dir: ")
-  dir := read()
+  flag.Parse()
+  var dir string
+  if flag.Arg(0) == "" {
+    fmt.Print("Enter the dir: ")
+    dir = read()
+  } else {
+    dir = flag.Arg(0)
+  }
+
+  //check for a DESCRIPTION file
   if check_for_file(dir + "/DESCRIPTION") {
     content, _ := ioutil.ReadFile(dir + "/DESCRIPTION")
     fmt.Printf("DESCRIPTION\n%s\n", content)
