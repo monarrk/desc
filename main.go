@@ -39,8 +39,7 @@ func main() {
   flag.Parse()
   var dir string
   if flag.Arg(0) == "" {
-    fmt.Print("Enter the dir: ")
-    dir = read()
+    dir = "."
   } else {
     dir = flag.Arg(0)
     if flag.Arg(1) == "edit" ||  flag.Arg(1) == "-e" {
